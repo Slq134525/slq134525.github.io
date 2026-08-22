@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HYDRA — The 7-Headed AI Bug Bounty System</title>
+<meta name="description" content="HYDRA is an open-source AI agent system that takes you from reconnaissance to submission-ready bug bounty reports. 7 agents, 111 skill modules, one-command setup.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%232ee6a8' stroke-width='2'><path d='M12 2c1 4-3 5-3 9a3 3 0 0 0 6 0c0-2-1-3-1-3s3 1 3 4a5 5 0 0 1-10 0c0-5 4-6 5-10z'/></svg>">
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-in">
+    <a class="logo" href="index.html">
+      <svg class="logo-mark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2c1 4-3 5-3 9a3 3 0 0 0 6 0c0-2-1-3-1-3s3 1 3 4a5 5 0 0 1-10 0c0-5 4-6 5-10z"/></svg>
+      HYDRA
+    </a>
+    <div class="nav-links">
+      <a href="agents.html">Agents</a>
+      <a href="skills.html">Skills</a>
+      <a href="index.html#start">Get Started</a>
+      <a href="index.html#faq">FAQ</a>
+    </div>
+    <a class="nav-gh keep" href="https://github.com/sricharan996/hydra" target="_blank" rel="noopener">
+      <svg width="15" height="15" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/></svg>
+      Star
+    </a>
+  </div>
+</nav>
+
+<header class="hero">
+  <canvas id="fx"></canvas>
+  <div class="hero-in">
+    <span class="kicker"><span class="dot"></span> OPEN SOURCE · v1.0 · MIT LICENSE</span>
+    <h1 class="title">HYDRA</h1>
+    <p class="tagline">Seven AI agents that hunt software bugs as a team — from first recon scan to a <b>submission-ready vulnerability report</b>. You stay in control; they do the grinding.</p>
+    <div class="hero-cta">
+      <a class="btn btn-primary" href="#start">Get Started</a>
+      <a class="btn btn-ghost" href="https://github.com/sricharan996/hydra" target="_blank" rel="noopener">View on GitHub</a>
+    </div>
+    <div class="install">
+      <span class="p">$</span>
+      <code id="cmd">git clone https://github.com/sricharan996/hydra.git &amp;&amp; cd hydra &amp;&amp; bash setup.sh</code>
+      <button data-copy="#cmd" aria-label="Copy install command">⧉</button>
+    </div>
+    <div style="height:44px"></div>
+    <div class="hero-meta">
+      <span><b>7</b> agents</span>
+      <span><b>111</b> skill modules</span>
+      <span><b>26</b> methodology playbooks</span>
+      <span><b>1</b> command setup</span>
+    </div>
+  </div>
+</header>
+
+<section class="plain">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <span class="sec-kicker">In plain language</span>
+      <h2>Bug hunting is 90% tedious work.<br>HYDRA automates the tedious 90%.</h2>
+      <p class="sec-sub">Companies pay hackers (bug bounties) to find security flaws in their apps. Finding one flaw means scanning thousands of pages, reading mountains of code, and testing the same things over and over. HYDRA is a team of AI agents that does that grind for you — then hands you a verified lead with proof attached.</p>
+    </div>
+    <div class="explain-grid">
+      <div class="explain-card rv">
+        <h3><span class="num">1</span> What's an "agent"?</h3>
+        <p>A software worker with a job description. Each HYDRA agent is a specialist — one scans networks, one double-checks findings, one writes the final report. They read files, run commands, and talk to each other so you don't have to babysit ten terminal windows.</p>
+      </div>
+      <div class="explain-card rv">
+        <h3><span class="num">2</span> What does it actually do?</h3>
+        <p>Give it a website you're authorized to test. It maps every subdomain, fingerprints the tech, probes for known weakness patterns, verifies what it finds three separate times, and writes everything up with proof-of-concept commands a human can replay.</p>
+      </div>
+      <div class="explain-card rv">
+        <h3><span class="num">3</span> Why "no false positives" matters?</h3>
+        <p>Bounty platforms reject sloppy reports — too many and your account gets banned. HYDRA's Verifier agent exists purely to say <em>"prove it again"</em>. If confidence is under 80%, the finding dies before it ever reaches a triage queue.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="sec-head rv">
+      <span class="sec-kicker">The pipeline</span>
+      <h2>How a hunt flows through the heads</h2>
+      <p class="sec-sub">Each agent hands off to the next. Everything is saved locally, hashed, and traceable.</p>
+    </div>
+    <div class="flow rv">
+      <div class="flow-node"><div class="fn-name" style="color:#00cc66">RECON</div><p>Maps the attack surface: subdomains, live hosts, tech stack. Tags CDN-shielded targets.</p></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-node"><div class="fn-name" style="color:#ff4444">HUNTER</div><p>Probes every entry point. Runs the scanning pipeline, tries WAF bypasses, saves raw leads.</p></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-node"><div class="fn-name" style="color:#ffaa00">VERIFIER</div><p>Replays each finding 3×, diffs responses, scores CVSS. Rejects anything under 80% confidence.</p></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-node"><div class="fn-name" style="color:#00aaff">REPORTER</div><p>Turns confirmed bugs into platform-ready reports with working proof-of-concept commands.</p></div>
+    </div>
+    <div style="display:flex;justify-content:center;margin-top:22px">
+      <p style="color:var(--faint);font-size:13px;font-family:var(--mono)">PLAN · AUDITOR · DEBUG support all stages — research, code review, self-correction</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="sec-head rv">
+      <span class="sec-kicker">The seven heads</span>
+      <h2>Meet the agents</h2>
+      <p class="sec-sub">Every agent ships with mission context, decision frameworks and strict output contracts — not just prompt text. <a href="agents.html">Full deep-dive →</a></p>
+    </div>
+    <div class="agent-grid">
+      <div class="acard rv" style="--c:#ff4444">
+        <div class="acard-head"><span class="acard-dot"></span><div><h3>Hunter</h3><span class="role">exploitation lead</span></div></div>
+        <p>Runs the full scanning pipeline and the probing cycles.</p>
+        <ul><li>CDN/WAF filtering before any scan</li><li>Vendor-specific bypass arsenal</li><li>Every lead hashed &amp; saved instantly</li></ul>
+      </div>
+      <div class="acard rv" style="--c:#ffaa00">
+        <div class="acard-head"><span class="acard-dot"></span><div><h3>Verifier</h3><span class="role">quality gate</span></div></div>
+        <p>The last line between you and a rejected report.</p>
+        <ul><li>3-request reproducibility rule</li><li>Baseline-vs-exploit response diffing</li><li>Calibrated CVSS scoring</li></ul>
+      </div>
+      <div class="acard rv" style="--c:#00aaff">
+        <div class="acard-head"><span class="acard-dot"></span><div><h3>Reporter</h3><span class="role">submission writer</span></div></div>
+        <p>Writes reports triagers can confirm in five minutes.</p>
+        <ul><li>Working curl PoCs, truncated proof output</li><li>CWE mapping &amp; CVSS vectors</li><li>Impact written in business terms</li></ul>
+      </div>
+      <div class="acard rv" style="--c:#00ff88">
+        <div class="acard-head"><span class="acard-dot"></span><div><h3>Plan</h3><span class="role">strategist</span></div></div>
+        <p>Researches the target before anyone fires a packet.</p>
+        <ul><li>Tech stack &amp; program research</li><li>P0–P3 prioritized attack vectors</li><li>Pivot conditions defined up front</li></ul>
+      </div>
+      <div class="acard rv" style="--c:#ff8800">
+        <div class="acard-head"><span class="acard-dot"></span><div><h3>Auditor</h3><span class="role">code reviewer</span></div></div>
+        <p>Reads source the way an attacker would.</p>
+        <ul><li>Dependency CVE sweep</li><li>Trust-boundary &amp; auth-flow analysis</li><li>Evidence standards: location, reachability, PoC</li></ul>
+      </div>
+      <div class="acard rv" style="--c:#00cc66">
+        <div class="acard-head"><span class="acard-dot"></span><div><h3>Recon</h3><span class="role">surface mapper</span></div></div>
+        <p>Fast, passive-first mapping that feeds everyone else.</p>
+        <ul><li>Zero packets until passive sources exhaust</li><li>Saturation detection — knows when to stop</li><li>Structured handoff report</li></ul>
+      </div>
+      <div class="acard rv" style="--c:#ff00ff">
+        <div class="acard-head"><span class="acard-dot"></span><div><h3>Debug</h3><span class="role">self-improvement engine</span></div></div>
+        <p>Learns from every mistake so it never repeats.</p>
+        <ul><li>Cross-agent memory propagation</li><li>Mistake → fix → prevention rules</li><li>Frustration-safe error recovery</li></ul>
+      </div>
+      <div class="acard rv" style="--c:#b18cff;display:flex;align-items:center;justify-content:center;text-align:center;border-style:dashed">
+        <a href="skills.html" style="font-family:var(--mono);font-size:14px">+ 111 skill modules behind them<br><span style="color:var(--faint);font-size:12.5px">Browse the library →</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="plain">
+  <div class="wrap">
+    <div class="band rv">
+      <div class="stat"><b>7</b><span>AI agents</span></div>
+      <div class="stat"><b>111</b><span>skill modules</span></div>
+      <div class="stat"><b>26</b><span>methodology playbooks</span></div>
+      <div class="stat"><b>16</b><span>automation scripts</span></div>
+      <div class="stat"><b>1</b><span>command to install</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="start">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <span class="sec-kicker">Getting started</span>
+      <h2>From zero to first hunt in five minutes</h2>
+      <p class="sec-sub">No build tools, no API-key maze. If you have Linux, macOS or WSL, this works.</p>
+    </div>
+    <div class="steps">
+      <div class="step rv">
+        <h3>Install</h3>
+        <p>One clone, one script. Setup installs opencode itself if it's missing, renders your identity into the config, and places all 111 skills. <code>bash setup.sh --handle you --email you@mail.com</code> runs without a single question.</p>
+      </div>
+      <div class="step rv">
+        <h3>Pick a model provider</h3>
+        <p>HYDRA speaks to any OpenAI-compatible endpoint — OpenRouter, NVIDIA NIM, LM Studio, ollama. One environment variable: <code>export OPENROUTER_API_KEY=...</code></p>
+      </div>
+      <div class="step rv">
+        <h3>Confirm your authorization</h3>
+        <p>Only test targets covered by a bug-bounty scope or ones you own. This is a hard rule baked into every agent — the Recon agent refuses to move until scope is confirmed.</p>
+      </div>
+      <div class="step rv">
+        <h3>Hunt</h3>
+        <p>Launch <code>opencode</code>, type <code>/hunt target.com</code>, and watch the pipeline work. Findings save locally with hashes; nothing leaves your machine but your own test traffic.</p>
+      </div>
+      <div class="step rv">
+        <h3>Verify, then report</h3>
+        <p>Feed leads to <code>/verify</code>. Survivors go to <code>/report</code> — out comes a submission-ready writeup with reproducible PoCs. Submit, collect, repeat.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="plain" id="faq">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <span class="sec-kicker">Questions people actually ask</span>
+      <h2>FAQ</h2>
+    </div>
+    <div class="faq">
+      <details class="rv"><summary>Is this legal to use?</summary><div class="a">Yes — on targets you're authorized to test: your own systems, or assets inside a bug bounty program's written scope. Every agent checks scope before acting, and the repo ships a full disclaimer. Testing random websites without permission is illegal everywhere that has computers.</div></details>
+      <details class="rv"><summary>Will it find bugs fully automatically while I sleep?</summary><div class="a">No — and be suspicious of anything claiming otherwise. HYDRA automates recon, pattern-matching, verification drudgery and report writing. Judgment — choosing targets, reading business logic, deciding what's worth pursuing — stays with you. Think of it as a very fast junior team you direct, not an autonomous money printer.</div></details>
+      <details class="rv"><summary>Do I need paid API keys?</summary><div class="a">You need one AI model provider. OpenRouter has free models; ollama runs fully local and free. Everything else — the skills, playbooks, scripts, CI — costs nothing and phones nobody.</div></details>
+      <details class="rv"><summary>What makes this different from just using ChatGPT?</summary><div class="a">ChatGPT gives advice; HYDRA executes. It runs real scanners against real targets, keeps per-agent memory across sessions, enforces verification discipline, and produces reports in exact platform format. It's a workflow with guards, not a chat window.</div></details>
+      <details class="rv"><summary>Can it break my computer or leak my data?</summary><div class="a">Findings and reports stay in ~/recon_reports on your machine. The repo's CI blocks secret-shaped content from ever being committed, and GitHub push protection is enabled. As with any tool that executes commands, read what it runs — that habit will serve you well beyond HYDRA.</div></details>
+      <details class="rv"><summary>What if an agent gets stuck or hallucinates?</summary><div class="a">All seven agents carry a Self-Rescue Protocol: when confused, they fire parallel web searches, fetch primary documentation, cross-verify two independent sources, and log the knowledge gap — instead of guessing confidently. The Debug agent turns every recovered mistake into a permanent prevention rule.</div></details>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="foot-in">
+    <span>🐉 HYDRA — built by <a href="https://github.com/sricharan996">@sricharan996</a></span>
+    <span><a href="https://github.com/sricharan996/hydra">GitHub</a> · <a href="https://opencode.ai">opencode</a> · <a href="https://github.com/sricharan996/hydra/blob/main/LICENSE">MIT</a> · <span id="yr"></span></span>
+  </div>
+</footer>
+
+<script src="assets/app.js"></script>
+</body>
+</html>
