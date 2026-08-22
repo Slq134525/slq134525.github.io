@@ -129,9 +129,10 @@ footer{padding:44px 0;border-top:1px solid var(--border);color:var(--faint);font
 .foot-in a:hover{color:var(--accent)}
 
 /* reveal on scroll */
-.rv{opacity:0;transform:translateY(16px);transition:opacity .5s ease,transform .5s ease}
-.rv.on{opacity:1;transform:none}
-@media(prefers-reduced-motion:reduce){.rv{transition:none;opacity:1;transform:none}}
+html.js .rv{opacity:0;transform:translateY(16px);transition:opacity .5s ease,transform .5s ease}
+html.js .rv.on{opacity:1;transform:none}
+html:not(.js) .rv{opacity:1}
+@media(prefers-reduced-motion:reduce){html.js .rv{transition:none;opacity:1;transform:none}}
 
 /* ================= v2 additions ================= */
 

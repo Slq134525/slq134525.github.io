@@ -6,7 +6,64 @@
   /* ================= HYDRA HEADS CANVAS ================= */
   /* One core + 7 orbiting agent heads, linked by pulsing tendrils.
      Heads drift toward the cursor — the system reacts to you.       */
-  const cv = document.getElementById('fx');
+  /* ================= copy buttons ================= */
+  document.querySelectorAll('[data-copy]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const src = document.querySelector(btn.getAttribute('data-copy'));
+      navigator.clipboard.writeText(src.innerText.trim()).then(() => {
+        const old = btn.textContent;
+        btn.textContent = '✓ copied';
+        setTimeout(() => btn.textContent = old, 1400);
+      });
+    });
+  });
+
+  /* ================= reveal + stagger ================= */
+  const io = new IntersectionObserver(es => es.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('on'); io.unobserve(e.target); }
+  }), { threshold: .12 });
+  document.querySelectorAll('.rv').forEach((el, i) => {
+    el.style.transitionDelay = (i % 4) * 60 + 'ms';
+    io.observe(el);
+  });
+
+  /* ================= stat counters ================= */
+  const cio = new IntersectionObserver(es => es.forEach(e => {
+    if (!e.isIntersecting) return;
+    cio.unobserve(e.target);
+    const end = +e.target.dataset.count, el = e.target, t0 = performance.now();
+    (function step(now) {
+      const k = Math.min(1, (now - t0) / 1100);
+      el.textContent = Math.round(end * (1 - Math.pow(1 - k, 3)));
+      if (k < 1) requestAnimationFrame(step);
+    })(t0);
+  }), { threshold: .6 });
+  document.querySelectorAll('[data-count]').forEach(el => cio.observe(el));
+
+  /* ================= pipeline sequential glow ================= */
+  const pio = new IntersectionObserver(es => es.forEach(e => {
+    if (!e.isIntersecting) return;
+    pio.unobserve(e.target);
+    e.target.querySelectorAll('.flow-node').forEach((n, i) =>
+      setTimeout(() => { n.classList.add('lit'); setTimeout(() => n.classList.remove('lit'), 1600); }, 500 + i * 550));
+  }), { threshold: .35 });
+  const fl = document.querySelector('.flow');
+  if (fl) pio.observe(fl);
+
+  /* ================= terminal demo typer ================= */
+  /* ================= active nav + year ================= */
+  const here = location.pathname.split('/').pop() || 'index.html';
+  document.querySelectorAll('.nav-links a').forEach(a => {
+    if (a.getAttribute('href') === here || (here.startsWith('index') && (a.getAttribute('href') || '').indexOf('index') === 0)) a.classList.add('active');
+  });
+  const y = document.getElementById('yr');
+  if (y) y.textContent = new Date().getFullYear();
+})();
+
+/* ================= isolated enhancements (cannot block content) ================= */
+try {
+(function(){
+const cv = document.getElementById('fx');
   if (cv && !RM) {
     const ctx = cv.getContext('2d');
     let W, H, raf, t = 0;
@@ -106,53 +163,12 @@
     setTimeout(ensureSize, 60); setTimeout(ensureSize, 300); setTimeout(ensureSize, 900);
     addEventListener('resize', () => { cancelAnimationFrame(raf); ensureSize(); size(); tick(); });
   }
+})();
+} catch(e) { console.warn('fx skipped:', e); }
 
-  /* ================= copy buttons ================= */
-  document.querySelectorAll('[data-copy]').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const src = document.querySelector(btn.getAttribute('data-copy'));
-      navigator.clipboard.writeText(src.innerText.trim()).then(() => {
-        const old = btn.textContent;
-        btn.textContent = '✓ copied';
-        setTimeout(() => btn.textContent = old, 1400);
-      });
-    });
-  });
-
-  /* ================= reveal + stagger ================= */
-  const io = new IntersectionObserver(es => es.forEach(e => {
-    if (e.isIntersecting) { e.target.classList.add('on'); io.unobserve(e.target); }
-  }), { threshold: .12 });
-  document.querySelectorAll('.rv').forEach((el, i) => {
-    el.style.transitionDelay = (i % 4) * 60 + 'ms';
-    io.observe(el);
-  });
-
-  /* ================= stat counters ================= */
-  const cio = new IntersectionObserver(es => es.forEach(e => {
-    if (!e.isIntersecting) return;
-    cio.unobserve(e.target);
-    const end = +e.target.dataset.count, el = e.target, t0 = performance.now();
-    (function step(now) {
-      const k = Math.min(1, (now - t0) / 1100);
-      el.textContent = Math.round(end * (1 - Math.pow(1 - k, 3)));
-      if (k < 1) requestAnimationFrame(step);
-    })(t0);
-  }), { threshold: .6 });
-  document.querySelectorAll('[data-count]').forEach(el => cio.observe(el));
-
-  /* ================= pipeline sequential glow ================= */
-  const pio = new IntersectionObserver(es => es.forEach(e => {
-    if (!e.isIntersecting) return;
-    pio.unobserve(e.target);
-    e.target.querySelectorAll('.flow-node').forEach((n, i) =>
-      setTimeout(() => { n.classList.add('lit'); setTimeout(() => n.classList.remove('lit'), 1600); }, 500 + i * 550));
-  }), { threshold: .35 });
-  const fl = document.querySelector('.flow');
-  if (fl) pio.observe(fl);
-
-  /* ================= terminal demo typer ================= */
-  const term = document.getElementById('term-body');
+try {
+(function(){
+const term = document.getElementById('term-body');
   if (term && !RM) {
     const LINES = [
       ['$ opencode', 'cmd'],
@@ -190,12 +206,5 @@
     }), { threshold: .4 });
     tio.observe(term.closest('.demo'));
   }
-
-  /* ================= active nav + year ================= */
-  const here = location.pathname.split('/').pop() || 'index.html';
-  document.querySelectorAll('.nav-links a').forEach(a => {
-    if (a.getAttribute('href') === here || (here.startsWith('index') && (a.getAttribute('href') || '').indexOf('index') === 0)) a.classList.add('active');
-  });
-  const y = document.getElementById('yr');
-  if (y) y.textContent = new Date().getFullYear();
 })();
+} catch(e) { console.warn('demo skipped:', e); }
