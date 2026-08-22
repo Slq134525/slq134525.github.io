@@ -5,6 +5,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>HYDRA — The 7-Headed AI Bug Bounty System</title>
 <meta name="description" content="HYDRA is an open-source AI agent system that takes you from reconnaissance to submission-ready bug bounty reports. 7 agents, 111 skill modules, one-command setup.">
+<meta property="og:title" content="HYDRA — The 7-Headed AI Bug Bounty System">
+<meta property="og:description" content="Seven AI agents that hunt software bugs as a team — from first recon scan to submission-ready report. Open source, one-command setup.">
+<meta property="og:url" content="https://sricharan996.github.io/">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#0a0e13">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
@@ -78,6 +84,21 @@
         <p>Bounty platforms reject sloppy reports — too many and your account gets banned. HYDRA's Verifier agent exists purely to say <em>"prove it again"</em>. If confidence is under 80%, the finding dies before it ever reaches a triage queue.</p>
       </div>
     </div>
+  </div>
+</section>
+
+<section class="demo" aria-label="Live demo">
+  <div class="demo-in">
+    <div class="sec-head rv" style="text-align:center;margin:0 auto 40px;max-width:600px">
+      <span class="sec-kicker">Watch it work</span>
+      <h2>One command. Four minutes.</h2>
+      <p class="sec-sub">A real hunt against a deliberately-vulnerable practice target — condensed to what you'd see scroll past.</p>
+    </div>
+    <div class="term rv">
+      <div class="term-bar"><i></i><i></i><i></i><span>opencode — hydra session</span></div>
+      <div id="term-body"></div>
+    </div>
+    <p class="demo-note">simulated transcript · actual pace shown at real relative timing</p>
   </div>
 </section>
 
@@ -156,10 +177,10 @@
 <section class="plain">
   <div class="wrap">
     <div class="band rv">
-      <div class="stat"><b>7</b><span>AI agents</span></div>
-      <div class="stat"><b>111</b><span>skill modules</span></div>
-      <div class="stat"><b>26</b><span>methodology playbooks</span></div>
-      <div class="stat"><b>16</b><span>automation scripts</span></div>
+      <div class="stat"><b data-count="7">0</b><span>AI agents</span></div>
+      <div class="stat"><b data-count="111">0</b><span>skill modules</span></div>
+      <div class="stat"><b data-count="26">0</b><span>methodology playbooks</span></div>
+      <div class="stat"><b data-count="16">0</b><span>automation scripts</span></div>
       <div class="stat"><b>1</b><span>command to install</span></div>
     </div>
   </div>
@@ -197,6 +218,28 @@
   </div>
 </section>
 
+<section>
+  <div class="wrap">
+    <div class="sec-head rv">
+      <span class="sec-kicker">Why not just…</span>
+      <h2>Manual hunting · ChatGPT · HYDRA</h2>
+      <p class="sec-sub">Same target, three approaches. Where each one actually stands.</p>
+    </div>
+    <div class="compare-wrap rv">
+      <table class="cmp">
+        <tr><th style="width:34%"></th><th>Manual hunting</th><th>A chatbot alone</th><th class="hydra-col">🐉 HYDRA</th></tr>
+        <tr><td>Recon coverage</td><td class="mid">Thorough but slow — hours per target</td><td class="no">Can't scan; guesses from memory</td><td class="hydra-col yes">Full pipeline, minutes, evidence saved</td></tr>
+        <tr><td>False-positive control</td><td class="mid">Depends on your discipline that day</td><td class="no">Confidently wrong, often</td><td class="hydra-col yes">Verifier gate: 3× replay + 80% confidence bar</td></tr>
+        <tr><td>Report quality</td><td class="yes">Excellent if you're a good writer</td><td class="mid">Generic, no reproducible PoC</td><td class="hydra-col yes">Platform-format + working curl PoC</td></tr>
+        <tr><td>Memory between sessions</td><td class="yes">Your notebook</td><td class="no">Forgets everything</td><td class="hydra-col yes">Per-agent memory files persist &amp; propagate</li></td>amp; propagate</td></tr>
+        <tr><td>Runs your real tools?</td><td class="yes">Yes — you drive them</td><td class="no">No execution</td><td class="hydra-col yes">Executes scanners, reads outputs, adapts</td></tr>
+        <tr><td>Judgment &amp; creativity</td><td class="yes">★★★★★ you</td><td class="mid">★ generic advice</td><td class="mid">★★★ frameworks + your direction</td></tr>
+      </table>
+    </div>
+    <p style="color:var(--faint);font-size:13px;margin-top:16px;font-family:var(--mono)">Honest row: judgment stays yours. HYDRA removes the grind around it.</p>
+  </div>
+</section>
+
 <section class="plain" id="faq">
   <div class="wrap">
     <div class="sec-head rv">
@@ -215,9 +258,37 @@
 </section>
 
 <footer>
-  <div class="foot-in">
-    <span>🐉 HYDRA — built by <a href="https://github.com/sricharan996">@sricharan996</a></span>
-    <span><a href="https://github.com/sricharan996/hydra">GitHub</a> · <a href="https://opencode.ai">opencode</a> · <a href="https://github.com/sricharan996/hydra/blob/main/LICENSE">MIT</a> · <span id="yr"></span></span>
+  <div class="foot-cols">
+    <div class="fcol fbrand">
+      <a class="logo" href="index.html" style="text-decoration:none">
+        <svg class="logo-mark" viewBox="0 0 24 24" fill="none" stroke="#2ee6a8" stroke-width="2"><path d="M12 2c1 4-3 5-3 9a3 3 0 0 0 6 0c0-2-1-3-1-3s3 1 3 4a5 5 0 0 1-10 0c0-5 4-6 5-10z"/></svg>
+        HYDRA
+      </a>
+      <p>The 7-headed AI bug bounty system. Open source under MIT. Test only what you're authorized to test.</p>
+    </div>
+    <div class="fcol">
+      <h4>Project</h4>
+      <a href="agents.html">Agents</a>
+      <a href="skills.html">Skill library</a>
+      <a href="index.html#start">Get started</a>
+      <a href="https://github.com/sricharan996/hydra/releases">Releases</a>
+    </div>
+    <div class="fcol">
+      <h4>Resources</h4>
+      <a href="https://github.com/sricharan996/hydra">GitHub repo</a>
+      <a href="https://github.com/sricharan996/bug-bounty-research">Research library</a>
+      <a href="https://opencode.ai">opencode</a>
+      <a href="https://github.com/sricharan996/hydra/issues">Issues</a>
+    </div>
+    <div class="fcol">
+      <h4>Legal</h4>
+      <a href="https://github.com/sricharan996/hydra/blob/main/LICENSE">MIT License</a>
+      <a href="https://github.com/sricharan996/hydra/blob/main/DISCLAIMER.md">Disclaimer</a>
+    </div>
+  </div>
+  <div class="foot-bottom">
+    <span>© <span id="yr"></span> sricharan996 — hunt ethically.</span>
+    <span style="font-family:var(--mono)">seven heads. one hunt.</span>
   </div>
 </footer>
 
