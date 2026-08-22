@@ -17,7 +17,19 @@
       { n: 'PLAN',     c: '#00ff88' }, { n: 'AUDIT', c: '#ff8800' },
       { n: 'DEBUG',    c: '#ff00ff' }
     ];
-    function size() { W = cv.width = cv.offsetWidth * devicePixelRatio; H = cv.height = cv.offsetHeight * devicePixelRatio; }
+    function size() {
+      const r = cv.getBoundingClientRect();
+      W = cv.width = Math.max(1, Math.round(r.width * devicePixelRatio));
+      H = cv.height = Math.max(1, Math.round(r.height * devicePixelRatio));
+    }
+    let lastW = 0, lastH = 0;
+    function ensureSize() {
+      const r = cv.getBoundingClientRect();
+      if (Math.abs(r.width - lastW) > 2 || Math.abs(r.height - lastH) > 2 || cv.width < 2) {
+        lastW = r.width; lastH = r.height;
+        size();
+      }
+    }
     function pos() {
       const cx = W * (.5 + (mouse.x - .5) * .06), cy = H * (.46 + (mouse.y - .42) * .06);
       const R = Math.min(W, H) * .30;
@@ -28,6 +40,7 @@
     }
     function tick() {
       t += 16;
+      if ((t / 16 | 0) % 30 === 0) ensureSize();
       ctx.clearRect(0, 0, W, H);
       const dpr = devicePixelRatio;
       const heads = pos();
@@ -84,14 +97,14 @@
 
       raf = requestAnimationFrame(tick);
     }
-    let raf;
     cv.parentElement.addEventListener('mousemove', e => {
       const r = cv.getBoundingClientRect();
       mouse.x = (e.clientX - r.left) / r.width;
       mouse.y = (e.clientY - r.top) / r.height;
     });
-    size(); tick();
-    addEventListener('resize', () => { cancelAnimationFrame(raf); size(); tick(); });
+    ensureSize(); size(); tick();
+    setTimeout(ensureSize, 60); setTimeout(ensureSize, 300); setTimeout(ensureSize, 900);
+    addEventListener('resize', () => { cancelAnimationFrame(raf); ensureSize(); size(); tick(); });
   }
 
   /* ================= copy buttons ================= */
@@ -181,7 +194,7 @@
   /* ================= active nav + year ================= */
   const here = location.pathname.split('/').pop() || 'index.html';
   document.querySelectorAll('.nav-links a').forEach(a => {
-    if (a.getAttribute('href') === here || (here.startsWith('index') && a.getAttribute('href')?.startsWith('index'))) a.classList.add('active');
+    if (a.getAttribute('href') === here || (here.startsWith('index') && (a.getAttribute('href') || '').indexOf('index') === 0)) a.classList.add('active');
   });
   const y = document.getElementById('yr');
   if (y) y.textContent = new Date().getFullYear();
